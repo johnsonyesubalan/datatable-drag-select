@@ -1,0 +1,35 @@
+<!-- header -->
+<header>
+    <a href="#/" class="logo">
+        <img src="img/logo.jpg" alt="Nokia" width="150">
+    </a>
+</header>
+
+<!-- main content -->
+
+<main>
+    <h3>Selected Data:</h3>
+    <div class="content"> 
+        <!-- table -->
+        <div class="table-responsive">
+
+            <table id="example" class="table table-bordered"> 
+                <thead>
+                    <tr> 
+                        <th ng-repeat="column in header">
+                            {{column.title}} 
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr ng-repeat="row in data">
+                        <td ng-repeat="column in header">
+                            {{row[column.key]}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> 
+    </div>
+</main>

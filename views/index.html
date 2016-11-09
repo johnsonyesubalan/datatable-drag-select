@@ -1,0 +1,58 @@
+<!-- header -->
+<header>
+    <a href="#/" class="logo">
+        <img src="img/logo.jpg" alt="Nokia" width="150">
+    </a>
+</header>
+
+<!-- main content -->
+
+<main>
+    <div class="content">
+
+        <!-- search -->
+        <div class="search">
+            <input type="text" ng-model="search" class="form-control" placeholder="Search">  
+            <a ng-click="getSelected()" href="#/view">Submit</a>
+        </div>
+
+        <!-- table -->
+        <div class="table-responsive">
+
+            <table id="example" class="table table-bordered"> 
+                <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" ng-model="isSelectAll" ng-change="selectall()" />{{selectall}}
+                        </th>
+                        <th ng-repeat="column in header" ng-click="sort(column.key)" ng-if="$index != 0">
+                            {{column.title}}
+                            <span class="sort" ng-show="sortKey==column.key" ng-class="{'up':reverse,'down':!reverse}"></span>
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody draggable="false">
+                    <tr dir-paginate="row in data|orderBy:sortKey:reverse|filter:search|itemsPerPage:paginationItemsPerPage" ng-mousedown="currentRow(row)" ng-mousemove="chooseRow(row, $event)" ng-mouseup="doNotSelect()">
+                        <td ng-repeat="column in header">
+                            <input type="checkbox" ng-model="row.selected" ng-if="$index == 0"> {{row[column.key]}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- pager & view count -->
+        <div class="pager">
+            <dir-pagination-controls max-size="paginationItemsPerPage" direction-links="true" boundary-links="true"></dir-pagination-controls>
+
+            <div class="counts">
+                <button ng-click="paginationItemsPerPage = 5">5</button>
+                <button ng-click="paginationItemsPerPage = 10" autofocus>10</button>
+                <button ng-click="paginationItemsPerPage = 50">50</button>
+                <button ng-click="paginationItemsPerPage = 100">100</button>
+                <button ng-click="paginationItemsPerPage = 500">500</button>
+            </div>
+        </div>
+    </div>
+</main>
